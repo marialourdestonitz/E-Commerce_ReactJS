@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState} from "react";
 
 import { signInWithGooglePopup ,createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword} from "../../utils/firebase/FirebaseUtils"; 
 
@@ -21,16 +21,15 @@ const SignIn = () => {
   };
 
   const signInWithGoogle=async()=>{
-    const {user}=await signInWithGooglePopup();
-   await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();   
 };
-
 
   const handleSubmit=async(event)=>{
     event.preventDefault();
 
     try{
-      const responce= await signInAuthUserWithEmailAndPassword(email, password);
+      const {user}= await signInAuthUserWithEmailAndPassword(email, password);
+
       resetFormFields();
 
     }catch(error){
@@ -56,8 +55,8 @@ const SignIn = () => {
   return (
     <div className="sign-up-container">
       <h2>Already have an account?</h2>
-      <span>Sign up with your Email and Password</span>
-      <form onSubmit={()=>{}}>
+      <span>Sign in with your Email and Password</span>
+      <form onSubmit={handleSubmit}>
 
     
       <FormInput 
